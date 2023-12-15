@@ -5,7 +5,7 @@ require "tilt/erubis"
 
 configure do
   enable :sessions
-  set :session_secret, 'secret'
+  set :session_secret, SecureRandom.hex(32)
   set :erb, :escape_html => true
 end
 
@@ -87,7 +87,6 @@ get "/lists" do
   @lists = session[:lists]
   erb :lists, layout: :layout
 end
-set :session_secret, SecureRandom.hex(32)
 
 # Render the new list form
 get "/lists/new" do
